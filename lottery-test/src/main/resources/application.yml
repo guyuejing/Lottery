@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+# Dubbo ??????
+dubbo:
+  application:
+    name: Lottery
+    version: 1.0.0
+    parameters:
+      unicast: false
+
+  registry:
+    address: multicast://224.5.6.7:1234
+  protocol:
+    name: dubbo
+    port: 20880
+
+
+spring:
+  datasource:
+    username: root
+    password: 123456
+    url: jdbc:mysql://124.222.179.228:3306/lottery?useUnicode=true&serverTimezone=Asia/Shanghai
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+#mybatis:
+#  mapper-locations: classpath:/mybatis/mapper/*.xml
+#  config-location: classpath:/mybatis/config/mybatis-config.xml
