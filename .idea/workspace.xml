@@ -4,71 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="309c19ba-9d7e-48d9-aeb6-d8eb40adfdd3" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-application/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-application/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-application/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-application/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-common/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-common/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-common/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-common/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/model/aggregates/StrategyRich.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/model/req/DrawReq.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/model/res/DrawResult.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/model/vo/AwardRateInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/model/vo/DrawAwardInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/repository/IStrategyRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/repository/impl/StrategyRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/service/algorithm/BaseAlgorithm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/service/algorithm/impl/EntireRateRandomDrawAlgorithm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/service/algorithm/impl/SingleRateRandomDrawAlgorithm.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/service/draw/AbstractDrawBase.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/service/draw/DrawConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/service/draw/DrawStrategySupport.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/service/draw/IDrawExec.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/java/lottery/domain/strategy/service/draw/impl/DrawExecImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-domain/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-infrastructure/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-infrastructure/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-infrastructure/src/main/java/lottery/infrastructure/dao/IAwardDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-infrastructure/src/main/java/lottery/infrastructure/dao/IStrategyDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-infrastructure/src/main/java/lottery/infrastructure/dao/IStrategyDetailDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-infrastructure/src/main/java/lottery/infrastructure/po/Award.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-infrastructure/src/main/java/lottery/infrastructure/po/Strategy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-infrastructure/src/main/java/lottery/infrastructure/po/StrategyDetail.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-infrastructure/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-infrastructure/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-interfaces/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-interfaces/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-interfaces/src/main/resources/mybatis/mapper/AwardMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-interfaces/src/main/resources/mybatis/mapper/StrategyDetailMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-interfaces/src/main/resources/mybatis/mapper/StrategyMapper.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-interfaces/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-interfaces/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-rpc/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-rpc/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-rpc/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-rpc/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-test/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-test/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-test/src/main/java/lottery/TestRPCApplcation.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-test/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-test/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-test/src/main/webapp/index.jsp" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lottery-test/src/test/java/lottery/APITest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+    <list default="true" id="309c19ba-9d7e-48d9-aeb6-d8eb40adfdd3" name="Changes" comment="2023-07-05 抽奖流程贯通">
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -249,8 +187,16 @@
       <workItem from="1683185712981" duration="593000" />
       <workItem from="1687745584546" duration="2423000" />
       <workItem from="1688046544126" duration="1257000" />
-      <workItem from="1688106254436" duration="50526000" />
+      <workItem from="1688106254436" duration="51544000" />
     </task>
+    <task id="LOCAL-00001" summary="2023-07-05 抽奖流程贯通">
+      <created>1688567361097</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1688567361097</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,6 +212,10 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="2023-07-05 抽奖流程贯通" />
+    <option name="LAST_COMMIT_MESSAGE" value="2023-07-05 抽奖流程贯通" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
