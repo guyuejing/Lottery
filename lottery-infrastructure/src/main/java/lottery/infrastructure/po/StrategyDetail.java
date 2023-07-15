@@ -5,12 +5,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class StrategyDetail {
-    private String id;
+    private Long id;
 
     // 策略ID
     private Long strategyId;
@@ -18,6 +19,7 @@ public class StrategyDetail {
     // 奖品ID
     private String awardId;
 
+    private String awardNmae;
     // 奖品数量
     private String awardCount;
 
@@ -25,12 +27,11 @@ public class StrategyDetail {
     private BigDecimal awardRate;
 
     // 创建时间
-    private String createTime;
+    private Timestamp createTime;
 
     // 修改时间
-    private String updateTime;
+    private Timestamp updateTime;
 
     private Integer awardSurplusCount;
 
-    private String awardDesc;
 }

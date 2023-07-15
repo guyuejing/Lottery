@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -28,8 +29,8 @@ public class Award {
     private String awardContent;
 
     // 创建时间
-    private Date createTime;
+    private Timestamp createTime;
 
     // 修改时间
-    private Date updateTime;
+    private Timestamp updateTime;
 }

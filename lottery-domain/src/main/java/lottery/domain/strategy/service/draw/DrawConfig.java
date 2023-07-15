@@ -1,5 +1,6 @@
 package lottery.domain.strategy.service.draw;
 
+import lottery.common.Constants;
 import lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 
 import javax.annotation.PostConstruct;
@@ -18,7 +19,7 @@ public class DrawConfig {
 
     @PostConstruct
     public void init() {
-        drawAlgorithmMap.put(1, entiretyRateRandomDrawAlgorithm);
-        drawAlgorithmMap.put(2, singleRateRandomDrawAlgorithm);
+        drawAlgorithmMap.put(Constants.StrategyMode.ENTIRETY.getCode(), entiretyRateRandomDrawAlgorithm);
+        drawAlgorithmMap.put(Constants.StrategyMode.SINGLE.getCode(), singleRateRandomDrawAlgorithm);
     }
 }

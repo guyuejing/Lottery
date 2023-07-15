@@ -2,7 +2,14 @@ package lottery.test;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
+import lottery.common.Constants;
+import lottery.domain.award.model.req.GoodsReq;
+import lottery.domain.award.model.res.DistributionRes;
+import lottery.domain.award.service.factory.DistributionGoodsFactory;
+import lottery.domain.award.service.goods.IDistributionGoods;
 import lottery.domain.strategy.model.req.DrawReq;
+import lottery.domain.strategy.model.res.DrawResult;
+import lottery.domain.strategy.model.vo.DrawAwardInfo;
 import lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import lottery.domain.strategy.service.draw.IDrawExec;
 import lottery.domain.strategy.service.draw.impl.DrawExecImpl;
@@ -37,35 +44,34 @@ public class ApiTest {
     @Resource
     private IDrawExec drawExec;
 
-//    @Test
-//    public void test_insert() {
-//        Activity activity = new Activity();
-//        activity.setActivityId(100002L);
-//        activity.setActivityName("测试活动");
-//        activity.setActivityDesc("仅用于插入数据测试");
-//        activity.setBeginDateTime(new Date());
-//        activity.setEndDateTime(new Date());
-//        activity.setStockCount(100);
-//        activity.setTakeCount(10);
-//        activity.setState(0);
-//        activity.setCreator("xiaofuge");
-//        activityDao.insert(activity);
-//    }
-
-
-//    @Test
-//    public void test_rpc() {
-//        ActivityReq req = new ActivityReq();
-//        req.setActivityId(2L);
-//        ActivityRes result = activityBooth.queryActivityById(req);
-//        log.info("测试结果： {}", JSON.toJSONString(result));
-//    }
+    @Resource
+    private DistributionGoodsFactory distributionGoodsFactory;
 
     @Test
     public void test_drawExec() {
-        drawExec.doDrawExec(new DrawReq("小傅哥", 10001L));
+        drawExec.doDrawExec(new DrawReq("guyuejing", 10001L));
         drawExec.doDrawExec(new DrawReq("小佳佳", 10001L));
         drawExec.doDrawExec(new DrawReq("小蜗牛", 10001L));
         drawExec.doDrawExec(new DrawReq("八杯水", 10001L));
+//        drawExec.doDrawExec(new DrawReq("德玛", 10002L));
+    }
+
+    @Test
+    public void test_award() {
+        DrawResult drawResult = drawExec.doDrawExec(new DrawReq("guyuejing", 10001L));
+        Integer drawState = drawResult.getDrawState();
+        if (Constants.DrawState.FAIL.getCode().equals(drawState)) {
+            log.info("未中奖， DrawAwardInfo is null");
+            return;
+        }
+        DrawAwardInfo drawAwardInfo = drawResult.getDrawAwardInfo();
+        GoodsReq goodsReq = new GoodsReq(drawResult.getUId(), "2109313442431",
+                drawAwardInfo.getAwardId(), drawAwardInfo.getAwardName(), drawAwardInfo.getAwardContent());
+
+        // 根据奖品类型从抽奖工厂中获取对应的发奖服务
+        IDistributionGoods goodsService = distributionGoodsFactory.getDistributionGoodsService(drawAwardInfo.getAwardType());
+        DistributionRes res = goodsService.doDistribution(goodsReq);
+        log.info("测试结果： {}", JSON.toJSONString(res));
+
     }
 }

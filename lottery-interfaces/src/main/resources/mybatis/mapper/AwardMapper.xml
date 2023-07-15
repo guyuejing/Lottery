@@ -2,8 +2,8 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="lottery.infrastructure.dao.IAwardDao">
     <select id="queryAwardInfo" parameterType="java.lang.String" resultType="lottery.infrastructure.po.Award">
-        select id, awardId, awardType, awardName, awardContent, createTime, updateTime
+        select id, award_id, award_type, award_name, award_content, create_time, update_time
         from award
-        where awardId = #{awardId}
+        where award_id = #{awardId}
     </select>
 </mapper>
