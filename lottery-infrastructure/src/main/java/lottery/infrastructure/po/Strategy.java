@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -25,14 +27,14 @@ public class Strategy {
     private Integer grantType;
 
     // 发放奖品时间
-    private Date grantDate;
+    private Timestamp grantDate;
 
     // 扩展信息
     private String extInfo;
 
     // 创建时间
-    private Date createTime;
+    private Timestamp createTime;
 
     // 修改时间
-    private Date updateTime;
+    private Timestamp updateTime;
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 @Data
@@ -22,13 +23,16 @@ public class Activity {
     private String activityDesc;
 
     // 开始时间
-    private Date beginDateTime;
+    private Timestamp beginDateTime;
 
     // 结束时间
-    private Date endDateTime;
+    private Timestamp endDateTime;
 
     // 库存
     private Integer stockCount;
+
+    // 库存剩余
+    private Integer stockSurplusCount;
 
     // 每人可参与次数
     private Integer takeCount;
@@ -40,8 +44,8 @@ public class Activity {
     private String creator;
 
     // 创建时间
-    private Date createTime;
+    private Timestamp createTime;
 
     // 修改时间
-    private Date updateTime;
+    private Timestamp updateTime;
 }

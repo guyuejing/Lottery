@@ -1,26 +1,18 @@
 package lottery.test;
 
-import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
 import lottery.domain.strategy.model.req.DrawReq;
 import lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import lottery.domain.strategy.service.draw.IDrawExec;
-import lottery.domain.strategy.service.draw.impl.DrawExecImpl;
 import lottery.infrastructure.dao.IActivityDao;
-import lottery.infrastructure.po.Activity;
-import lottery.rpc.IActivityBooth;
-import lottery.rpc.req.ActivityReq;
-import lottery.rpc.res.ActivityRes;
-import org.apache.dubbo.config.annotation.Reference;
+import lottery.infrastructure.dao.IStrategyDao;
+import lottery.infrastructure.po.Strategy;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -37,7 +29,7 @@ public class ApiTest {
     @Resource
     private IDrawExec drawExec;
 
-//    @Test
+    //    @Test
 //    public void test_insert() {
 //        Activity activity = new Activity();
 //        activity.setActivityId(100002L);
@@ -51,7 +43,8 @@ public class ApiTest {
 //        activity.setCreator("xiaofuge");
 //        activityDao.insert(activity);
 //    }
-
+    @Resource
+    private IStrategyDao strategyDao;
 
 //    @Test
 //    public void test_rpc() {
@@ -60,6 +53,12 @@ public class ApiTest {
 //        ActivityRes result = activityBooth.queryActivityById(req);
 //        log.info("测试结果： {}", JSON.toJSONString(result));
 //    }
+
+    @Test
+    public void test_select() {
+        Strategy strategy = strategyDao.queryStrategy(10001L);
+        System.out.println(strategy);
+    }
 
     @Test
     public void test_drawExec() {
