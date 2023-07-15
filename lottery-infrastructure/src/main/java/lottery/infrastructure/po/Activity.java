@@ -31,6 +31,9 @@ public class Activity {
     // 库存
     private Integer stockCount;
 
+    // 库存剩余
+    private Integer stockSurplusCount;
+
     // 每人可参与次数
     private Integer takeCount;
 
