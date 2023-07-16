@@ -1,4 +1,4 @@
-package lottery.domain.strategy.repository.impl;
+package lottery.infrastructure.repository;
 
 import lottery.domain.strategy.model.aggregates.StrategyRich;
 import lottery.domain.strategy.repository.IStrategyRepository;
