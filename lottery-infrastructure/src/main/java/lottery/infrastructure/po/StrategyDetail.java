@@ -19,9 +19,9 @@ public class StrategyDetail {
     // 奖品ID
     private String awardId;
 
-    private String awardNmae;
+    private String awardName;
     // 奖品数量
-    private String awardCount;
+    private Integer awardCount;
 
     // 中奖概率
     private BigDecimal awardRate;

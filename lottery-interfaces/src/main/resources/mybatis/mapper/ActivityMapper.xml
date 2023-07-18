@@ -29,4 +29,8 @@
         FROM activity
         WHERE activity_id = #{activityId}
     </select>
+
+    <update id="alterState" parameterType="lottery.domain.activity.model.vo.AlterStateVO">
+        update activity set state=#{afterState} where activity_id = #{activityId} and state = #{beforeState};
+    </update>
 </mapper>

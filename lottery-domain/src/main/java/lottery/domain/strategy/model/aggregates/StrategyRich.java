@@ -3,8 +3,9 @@ package lottery.domain.strategy.model.aggregates;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lottery.infrastructure.po.Strategy;
-import lottery.infrastructure.po.StrategyDetail;
+import lottery.domain.strategy.model.vo.StrategyBriefVO;
+import lottery.domain.strategy.model.vo.StrategyDetailBriefVO;
+
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
 public class StrategyRich {
     private Long strategyId;
     // 策略配置
-    private Strategy strategy;
+    private StrategyBriefVO strategy;
     // 策略明细
-    private List<StrategyDetail> strategyDetailList;
+    private List<StrategyDetailBriefVO> strategyDetailList;
 }

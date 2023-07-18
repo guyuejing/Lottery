@@ -1,5 +1,8 @@
 package lottery.domain.activity.model.aggregates;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lottery.domain.activity.model.vo.ActivityVO;
 import lottery.domain.activity.model.vo.AwardVO;
 import lottery.domain.activity.model.vo.StrategyVO;
@@ -9,6 +12,9 @@ import java.util.List;
 /**
  * 活动配置聚合信息
  */
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ActivityConfigRich {
 
     /** 活动配置 */

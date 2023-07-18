@@ -1,21 +1,15 @@
-package lottery.domain.activity.model.vo;
+package lottery.domain.strategy.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.List;
 
-/**
- * 策略信息配置
- */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class StrategyVO {
-
+@AllArgsConstructor
+public class StrategyBriefVO {
     /**
      * 策略ID
      */
@@ -45,10 +39,4 @@ public class StrategyVO {
      * 扩展信息
      */
     private String extInfo;
-
-
-    /**
-     * 策略详情配置
-     */
-    private List<StrategyDetailVO> strategyDetailList;
 }
