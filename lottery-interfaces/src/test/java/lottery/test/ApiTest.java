@@ -20,6 +20,7 @@ import lottery.domain.strategy.model.vo.DrawAwardInfo;
 import lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import lottery.domain.strategy.service.draw.IDrawExec;
 import lottery.domain.strategy.service.draw.impl.DrawExecImpl;
+import lottery.domain.support.ids.IIDGenerator;
 import lottery.infrastructure.dao.IActivityDao;
 import lottery.infrastructure.dao.IAwardDao;
 import lottery.infrastructure.dao.IStrategyDao;
@@ -43,6 +44,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -68,6 +70,8 @@ public class ApiTest {
     @Resource
     private DistributionGoodsFactory distributionGoodsFactory;
 
+    @Resource
+    private Map<Constants.Ids, IIDGenerator> idGeneratorMap;
     @Resource
     private IActivityDeploy activityDeploy;
     @Test
@@ -207,6 +211,14 @@ public class ApiTest {
         activityConfigRich.setAwardList(awardVOList);
         activityConfigRich.setStrategy(strategy);
         activityDeploy.createActivity(new ActivityConfigReq(10003L, activityConfigRich));
+    }
+
+    @Test
+    public void test_id_generate() {
+        log.info("雪花算法策略，生成id： {}", idGeneratorMap.get(Constants.Ids.SnowFlake).nextId());
+        log.info("日期算法策略，生成id： {}", idGeneratorMap.get(Constants.Ids.ShortCode).nextId());
+        log.info("随机算法策略，生成id： {}", idGeneratorMap.get(Constants.Ids.RandomNumeric).nextId());
+
     }
 
 
