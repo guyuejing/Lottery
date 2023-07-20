@@ -19,20 +19,10 @@ import lottery.domain.strategy.model.res.DrawResult;
 import lottery.domain.strategy.model.vo.DrawAwardInfo;
 import lottery.domain.strategy.service.algorithm.IDrawAlgorithm;
 import lottery.domain.strategy.service.draw.IDrawExec;
-import lottery.domain.strategy.service.draw.impl.DrawExecImpl;
 import lottery.domain.support.ids.IIDGenerator;
-import lottery.infrastructure.dao.IActivityDao;
-import lottery.infrastructure.dao.IAwardDao;
-import lottery.infrastructure.dao.IStrategyDao;
-import lottery.infrastructure.dao.IStrategyDetailDao;
-import lottery.infrastructure.po.Activity;
-import lottery.infrastructure.po.Strategy;
-import lottery.infrastructure.po.StrategyDetail;
-import lottery.rpc.IActivityBooth;
-import lottery.rpc.req.ActivityReq;
-import lottery.rpc.res.ActivityRes;
-import org.apache.dubbo.config.annotation.Reference;
-import org.junit.Before;
+import lottery.infrastructure.dao.*;
+import lottery.infrastructure.po.UserStrategyExport;
+import lottery.infrastructure.po.UserTakeActivity;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -40,7 +30,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -74,6 +63,12 @@ public class ApiTest {
     private Map<Constants.Ids, IIDGenerator> idGeneratorMap;
     @Resource
     private IActivityDeploy activityDeploy;
+    @Resource
+    private IUserTakeActivityDao userTakeActivityDao;
+
+    @Resource
+    private IUserStrategyExportDao userStrategyExportDao;
+
     @Test
     public void test_drawExec() {
         drawExec.doDrawExec(new DrawReq("guyuejing", 10001L));
@@ -101,6 +96,7 @@ public class ApiTest {
         log.info("测试结果： {}", JSON.toJSONString(res));
 
     }
+
     @Test
     public void test_deploy() {
 
@@ -221,5 +217,40 @@ public class ApiTest {
 
     }
 
+    @Test
+    public void test_split_database() {
+        UserTakeActivity userTakeActivity = new UserTakeActivity();
+        userTakeActivity.setuId("Ukdli109op811d"); // 1库：Ukdli109op89oi 2库：Ukdli109op811d
+        userTakeActivity.setTakeId(121019889410L);
+        userTakeActivity.setActivityId(100001L);
+        userTakeActivity.setActivityName("测试活动");
+        userTakeActivity.setTakeDate(new Date());
+        userTakeActivity.setTakeCount(10);
+        userTakeActivity.setUuid("Ukdli109op811d");
+
+        userTakeActivityDao.insert(userTakeActivity);
+
+    }
+
+    @Test
+    public void test_split_table() {
+        UserStrategyExport userStrategyExport = new UserStrategyExport();
+        userStrategyExport.setuId("Uhdgkw766120d");
+        userStrategyExport.setActivityId(idGeneratorMap.get(Constants.Ids.ShortCode).nextId());
+        userStrategyExport.setOrderId(idGeneratorMap.get(Constants.Ids.SnowFlake).nextId());
+        userStrategyExport.setStrategyId(idGeneratorMap.get(Constants.Ids.RandomNumeric).nextId());
+        userStrategyExport.setStrategyMode(Constants.StrategyMode.SINGLE.getCode());
+        userStrategyExport.setGrantType(1);
+        userStrategyExport.setGrantDate(new Date());
+        userStrategyExport.setGrantState(1);
+        userStrategyExport.setAwardId("1");
+        userStrategyExport.setAwardType(Constants.AwardType.DESC.getCode());
+        userStrategyExport.setAwardName("IMac");
+        userStrategyExport.setAwardContent("奖品描述");
+        userStrategyExport.setUuid(String.valueOf(userStrategyExport.getOrderId()));
+
+        userStrategyExportDao.insert(userStrategyExport);
+
+    }
 
 }
