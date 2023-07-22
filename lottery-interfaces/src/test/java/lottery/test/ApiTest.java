@@ -5,11 +5,14 @@ import lombok.extern.slf4j.Slf4j;
 import lottery.common.Constants;
 import lottery.domain.activity.model.aggregates.ActivityConfigRich;
 import lottery.domain.activity.model.req.ActivityConfigReq;
+import lottery.domain.activity.model.req.PartakeReq;
+import lottery.domain.activity.model.res.PartakeResult;
 import lottery.domain.activity.model.vo.ActivityVO;
 import lottery.domain.activity.model.vo.AwardVO;
 import lottery.domain.activity.model.vo.StrategyDetailVO;
 import lottery.domain.activity.model.vo.StrategyVO;
 import lottery.domain.activity.service.deploy.IActivityDeploy;
+import lottery.domain.activity.service.partake.IActivityPartake;
 import lottery.domain.award.model.req.GoodsReq;
 import lottery.domain.award.model.res.DistributionRes;
 import lottery.domain.award.service.factory.DistributionGoodsFactory;
@@ -30,6 +33,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -68,6 +72,8 @@ public class ApiTest {
 
     @Resource
     private IUserStrategyExportDao userStrategyExportDao;
+    @Resource
+    private IActivityPartake activityPartake;
 
     @Test
     public void test_drawExec() {
@@ -224,7 +230,7 @@ public class ApiTest {
         userTakeActivity.setTakeId(121019889410L);
         userTakeActivity.setActivityId(100001L);
         userTakeActivity.setActivityName("测试活动");
-        userTakeActivity.setTakeDate(new Date());
+        userTakeActivity.setTakeDate((Timestamp) new Date());
         userTakeActivity.setTakeCount(10);
         userTakeActivity.setUuid("Ukdli109op811d");
 
@@ -252,5 +258,14 @@ public class ApiTest {
         userStrategyExportDao.insert(userStrategyExport);
 
     }
+
+    @Test
+    public void test_partake() {
+        PartakeReq req = new PartakeReq("Uhdgkw766120d", 100001L, new Timestamp(new Date().getTime()));
+        PartakeResult result = activityPartake.doPartake(req);
+        log.info("请求参数： {}", JSON.toJSONString(req));
+        log.info("测试结果： {}", JSON.toJSONString(result));
+    }
+
 
 }

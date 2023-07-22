@@ -3,18 +3,16 @@ package lottery.infrastructure.po;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.ibatis.annotations.Mapper;
 
 import java.sql.Timestamp;
-import java.util.Date;
 
 /**
- * 用户领取活动表
+ * 用户活动参与次数表
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class UserTakeActivity {
+@AllArgsConstructor
+public class UserTakeActivityCount {
     /**
      * 自增ID
      */
@@ -24,29 +22,17 @@ public class UserTakeActivity {
      */
     private String uId;
     /**
-     * 活动领取ID
-     */
-    private Long takeId;
-    /**
      * 活动ID
      */
     private Long activityId;
     /**
-     * 活动名称
+     * 可领取次数
      */
-    private String activityName;
+    private Integer totalCount;
     /**
-     * 活动领取时间
+     * 剩余可领取次数
      */
-    private Timestamp takeDate;
-    /**
-     * 领取次数
-     */
-    private Integer takeCount;
-    /**
-     * 防重ID
-     */
-    private String uuid;
+    private Integer leftCount;
     /**
      * 创建时间
      */
@@ -59,7 +45,7 @@ public class UserTakeActivity {
     public void setuId(String uId) {
         this.uId = uId;
     }
-    public String getuId() {
+    public String getuId(){
         return this.uId;
     }
 }

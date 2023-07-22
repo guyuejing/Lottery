@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 /**
@@ -73,11 +74,11 @@ public class UserStrategyExport {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private Timestamp createTime;
     /**
      * 更新时间
      */
-    private Date updateTime;
+    private Timestamp updateTime;
 
     public String getuId() {
         return this.uId;
