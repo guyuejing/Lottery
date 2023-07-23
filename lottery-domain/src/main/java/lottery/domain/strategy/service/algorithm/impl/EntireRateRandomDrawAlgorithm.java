@@ -45,6 +45,7 @@ public class EntireRateRandomDrawAlgorithm extends BaseAlgorithm {
                 award = awardRateInfo.getAwardId();
                 break;
             }
+            cursorVal += rateVal;
         }
         return award;
     }

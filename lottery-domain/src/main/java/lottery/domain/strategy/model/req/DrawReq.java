@@ -12,4 +12,8 @@ public class DrawReq {
 
     // 策略ID
     private Long strategyId;
+    /**
+     * 防重ID
+     */
+    private String uuid;
 }

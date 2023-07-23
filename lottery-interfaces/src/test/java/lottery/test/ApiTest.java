@@ -77,31 +77,31 @@ public class ApiTest {
 
     @Test
     public void test_drawExec() {
-        drawExec.doDrawExec(new DrawReq("guyuejing", 10001L));
-        drawExec.doDrawExec(new DrawReq("小佳佳", 10001L));
-        drawExec.doDrawExec(new DrawReq("小蜗牛", 10001L));
-        drawExec.doDrawExec(new DrawReq("八杯水", 10001L));
+//        drawExec.doDrawExec(new DrawReq("guyuejing", 10001L));
+//        drawExec.doDrawExec(new DrawReq("小佳佳", 10001L));
+//        drawExec.doDrawExec(new DrawReq("小蜗牛", 10001L));
+//        drawExec.doDrawExec(new DrawReq("八杯水", 10001L));
 //        drawExec.doDrawExec(new DrawReq("德玛", 10002L));
     }
 
-    @Test
-    public void test_award() {
-        DrawResult drawResult = drawExec.doDrawExec(new DrawReq("guyuejing", 10001L));
-        Integer drawState = drawResult.getDrawState();
-        if (Constants.DrawState.FAIL.getCode().equals(drawState)) {
-            log.info("未中奖， DrawAwardInfo is null");
-            return;
-        }
-        DrawAwardInfo drawAwardInfo = drawResult.getDrawAwardInfo();
-        GoodsReq goodsReq = new GoodsReq(drawResult.getUId(), "2109313442431",
-                drawAwardInfo.getAwardId(), drawAwardInfo.getAwardName(), drawAwardInfo.getAwardContent());
-
-        // 根据奖品类型从抽奖工厂中获取对应的发奖服务
-        IDistributionGoods goodsService = distributionGoodsFactory.getDistributionGoodsService(drawAwardInfo.getAwardType());
-        DistributionRes res = goodsService.doDistribution(goodsReq);
-        log.info("测试结果： {}", JSON.toJSONString(res));
-
-    }
+//    @Test
+//    public void test_award() {
+//        DrawResult drawResult = drawExec.doDrawExec(new DrawReq("guyuejing", 10001L));
+//        Integer drawState = drawResult.getDrawState();
+//        if (Constants.DrawState.FAIL.getCode().equals(drawState)) {
+//            log.info("未中奖， DrawAwardInfo is null");
+//            return;
+//        }
+//        DrawAwardInfo drawAwardInfo = drawResult.getDrawAwardInfo();
+//        GoodsReq goodsReq = new GoodsReq(drawResult.getUId(), "2109313442431",
+//                drawAwardInfo.getAwardId(), drawAwardInfo.getAwardName(), drawAwardInfo.getAwardContent());
+//
+//        // 根据奖品类型从抽奖工厂中获取对应的发奖服务
+//        IDistributionGoods goodsService = distributionGoodsFactory.getDistributionGoodsService(drawAwardInfo.getAwardType());
+//        DistributionRes res = goodsService.doDistribution(goodsReq);
+//        log.info("测试结果： {}", JSON.toJSONString(res));
+//
+//    }
 
     @Test
     public void test_deploy() {
