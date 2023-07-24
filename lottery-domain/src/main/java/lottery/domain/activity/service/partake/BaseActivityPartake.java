@@ -43,6 +43,7 @@ public abstract class BaseActivityPartake extends ActivityPartakeSupports implem
         Long takeId = idGeneratorMap.get(Constants.Ids.SnowFlake).nextId();
         Result grabResult = this.grabActivity(req, activityBillVO, takeId);
         if (!Constants.ResponseCode.SUCCESS.getCode().equals(grabResult.getCode())) {
+            // TODO 如果领取活动失败 需要将活动库存+1
             return new PartakeResult(grabResult.getCode(), grabResult.getInfo());
         }
 

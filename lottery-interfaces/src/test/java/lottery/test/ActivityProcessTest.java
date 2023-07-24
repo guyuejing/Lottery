@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import lottery.application.process.IActivityProcess;
 import lottery.application.process.req.DrawProcessReq;
 import lottery.application.process.res.DrawProcessResult;
+import lottery.infrastructure.dao.IAwardDao;
+import lottery.infrastructure.po.Award;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.LoggerFactory;
@@ -23,14 +25,21 @@ public class ActivityProcessTest {
     @Resource
     private IActivityProcess activityProcess;
 
+    @Resource
+    private IAwardDao awardDao;
     @Test
     public void test_doDrawProcess() {
         DrawProcessReq req = new DrawProcessReq();
-        req.setuId("guyuejing");
+        req.setuId("hujing");
         req.setActivityId(100001L);
         DrawProcessResult drawProcessResult = activityProcess.doDrawProcess(req);
         log.info("请求入参：{}", JSON.toJSONString(req));
         log.info("测试结果： {}", JSON.toJSONString(drawProcessResult));
     }
 
+    @Test
+    public void test_award() {
+        Award award = awardDao.queryAwardInfo("5");
+        log.info(award.toString());
+    }
 }
