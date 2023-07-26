@@ -2,9 +2,7 @@ package lottery;
 
 import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import lottery.rpc.IActivityBooth;
-import lottery.rpc.req.ActivityReq;
-import lottery.rpc.res.ActivityRes;
+import lottery.rpc.ILotteryActivityBooth;
 import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,8 +14,8 @@ import org.springframework.test.context.junit4.SpringRunner;
 @Slf4j
 public class APITest {
 
-    @Reference(interfaceClass = IActivityBooth.class, url = "dubbo://127.0.0.1:20880")
-    private IActivityBooth activityBooth;
+    @Reference(interfaceClass = ILotteryActivityBooth.class, url = "dubbo://127.0.0.1:20880")
+    private ILotteryActivityBooth activityBooth;
 
     @Test
     public void test_rpc() {

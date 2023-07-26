@@ -3,13 +3,16 @@ package lottery.common;
 import java.io.Serializable;
 
 public class Constants implements Serializable {
+
     public enum ResponseCode {
         SUCCESS("0000", "成功"),
         UN_ERROR("0001", "未知失败"),
         ILLEAGL_PARAMETER("0002", "非法参数"),
         INDEX_DUP("0003", "主键冲突"),
         LOSING_DRAW("D001", "未中奖"),
-        NO_UPDATE("0004", "SQL操作无更新");
+        NO_UPDATE("0004", "SQL操作无更新"),
+
+        RULE_ERR("D002", "量化人群规则执行失败");
         private String code;
         private String info;
 
@@ -279,6 +282,7 @@ public class Constants implements Serializable {
          */
         RandomNumeric;
     }
+
     /**
      * 活动单使用状态 0未使用、1已使用
      */
@@ -315,7 +319,7 @@ public class Constants implements Serializable {
     /**
      * 发奖状态 0初始、1完成、2失败
      */
-    public enum GrantState{
+    public enum GrantState {
 
         INIT(0, "初始"),
         COMPLETE(1, "完成"),
@@ -344,5 +348,59 @@ public class Constants implements Serializable {
         public void setInfo(String info) {
             this.info = info;
         }
+    }
+
+    /**
+     * 全局属性
+     */
+    public static final class Global {
+        /**
+         * 空节点值
+         */
+        public static final Long TREE_NULL_NODE = 0L;
+    }
+
+    /**
+     * 决策树节点
+     */
+    public static final class NodeType {
+        /**
+         * 树茎
+         */
+        public static final Integer STEM = 1;
+        /**
+         * 果实
+         */
+        public static final Integer FRUIT = 2;
+    }
+
+    /**
+     * 规则限定类型
+     */
+    public static final class RuleLimitType {
+        /**
+         * 等于
+         */
+        public static final int EQUAL = 1;
+        /**
+         * 大于
+         */
+        public static final int GT = 2;
+        /**
+         * 小于
+         */
+        public static final int LT = 3;
+        /**
+         * 大于&等于
+         */
+        public static final int GE = 4;
+        /**
+         * 小于&等于
+         */
+        public static final int LE = 5;
+        /**
+         * 枚举
+         */
+        public static final int ENUM = 6;
     }
 }

@@ -11,6 +11,7 @@ import java.util.Date;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Award {
+    // TODO 需要增加每件商品的库存字段
     private Long id;
 
     // 奖品ID
