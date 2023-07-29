@@ -86,3 +86,16 @@ spring:
       #listner负责ack，每调用一次，就立即commit
       ack-mode: manual_immediate
       missing-topics-fatal: false
+
+xxl:
+  job:
+    admin:
+      addresses: http://localhost:7397/xxl-job-admin
+    executor:
+      address:
+      appname: lottery-job
+      ip:
+      port: 9998
+      logpath: G:\lottery\version3\log
+      logretentiondays: 7
+    accessToken:
