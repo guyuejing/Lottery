@@ -7,6 +7,7 @@ import lottery.common.Result;
 import lottery.domain.activity.model.req.PartakeReq;
 import lottery.domain.activity.model.vo.ActivityBillVO;
 import lottery.domain.activity.model.vo.DrawOrderVO;
+import lottery.domain.activity.model.vo.InvoiceVO;
 import lottery.domain.activity.model.vo.UserTakeActivityVO;
 import lottery.domain.activity.repository.IUserTakeActivityRepository;
 import lottery.domain.activity.service.partake.BaseActivityPartake;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.support.TransactionTemplate;
 
 import javax.annotation.Resource;
+import java.util.List;
 import java.util.Map;
 
 @Service
@@ -131,5 +133,18 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
     @Override
     public void updateInvoiceMqState(String uId, Long orderId, Integer mqState) {
         userTakeActivityRepository.updateInvoiceMqState(uId, orderId, mqState);
+    }
+
+    @Override
+    public List<InvoiceVO> scanInvoiceMqState(int dbCount, int tbCount) {
+        try {
+            // 设置路由
+            dbRouter.setDBKey(dbCount);
+            dbRouter.setTBKey(tbCount);
+            // 查询数据
+            return userTakeActivityRepository.scanInvoiceMqState();
+        }finally {
+            dbRouter.clear();
+        }
     }
 }

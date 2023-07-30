@@ -2,6 +2,7 @@ package lottery.infrastructure.repository;
 
 import lottery.common.Constants;
 import lottery.domain.activity.model.vo.DrawOrderVO;
+import lottery.domain.activity.model.vo.InvoiceVO;
 import lottery.domain.activity.model.vo.UserTakeActivityVO;
 import lottery.domain.activity.repository.IUserTakeActivityRepository;
 import lottery.infrastructure.dao.IUserStrategyExportDao;
@@ -15,7 +16,9 @@ import org.springframework.stereotype.Repository;
 
 import javax.annotation.Resource;
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Repository
 public class UserTakeActivityRepository implements IUserTakeActivityRepository {
@@ -125,5 +128,23 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
         userStrategyExport.setOrderId(orderId);
         userStrategyExport.setMqState(mqState);
         userStrategyExportDao.updateInvoiceMqState(userStrategyExport);
+    }
+
+    @Override
+    public List<InvoiceVO> scanInvoiceMqState() {
+        // 查询发送MQ失败和超时30分钟未发送MQ的数据
+        List<UserStrategyExport> userStrategyExports = userStrategyExportDao.scanInvoiceMqState();
+        List<InvoiceVO> invoiceVOList = new ArrayList<>(userStrategyExports.size());
+        for (UserStrategyExport export : userStrategyExports) {
+            InvoiceVO invoiceVO = new InvoiceVO();
+            invoiceVO.setuId(export.getuId());
+            invoiceVO.setOrderId(export.getOrderId());
+            invoiceVO.setAwardId(export.getAwardId());
+            invoiceVO.setAwardType(export.getAwardType());
+            invoiceVO.setAwardName(export.getAwardName());
+            invoiceVO.setAwardContent(export.getAwardContent());
+            invoiceVOList.add(invoiceVO);
+        }
+        return invoiceVOList;
     }
 }
