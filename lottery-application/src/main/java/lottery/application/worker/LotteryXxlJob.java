@@ -124,12 +124,14 @@ public class LotteryXxlJob {
                         public void onSuccess(SendResult<String, Object> stringObjectSendResult) {
                             // MQ 消息发送完成，更新数据库表 user_strategy_export.mq_state = 1
                             activityPartake.updateInvoiceMqState(invoiceVO.getuId(), invoiceVO.getOrderId(), Constants.MQState.COMPLETE.getCode());
+                            logger.info("更新mq状态完成： uid：{}， orderid：{}，mqstate：{}",invoiceVO.getuId(), invoiceVO.getOrderId(), Constants.MQState.COMPLETE.getCode());
                         }
 
                         @Override
                         public void onFailure(Throwable throwable) {
                             // MQ 消息发送失败，更新数据库表 user_strategy_export.mq_state = 2 【等待定时任务扫码补偿MQ消息】
                             activityPartake.updateInvoiceMqState(invoiceVO.getuId(), invoiceVO.getOrderId(), Constants.MQState.FAIL.getCode());
+                            logger.info("更新mq状态失败！！！！！： uid：{}， orderid：{}，mqstate：{}",invoiceVO.getuId(), invoiceVO.getOrderId(), Constants.MQState.FAIL.getCode());
                         }
 
                     });

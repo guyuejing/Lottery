@@ -7,7 +7,7 @@ import java.io.Serializable;
 /**
  * 中奖物品发货单 用于发送MQ消息，异步触发发奖货品给用户
  */
-public class InvoiceVO implements Serializable {
+public class InvoiceVO{
     /** 用户ID */
     private String uId;
 

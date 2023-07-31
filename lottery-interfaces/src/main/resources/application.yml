@@ -96,6 +96,7 @@ xxl:
       appname: lottery-job
       ip:
       port: 9998
-      logpath: G:\lottery\version3\log
+#      logpath: G:\lottery\version3\log
+      logpath: F:\Lottery\log
       logretentiondays: 7
     accessToken:
