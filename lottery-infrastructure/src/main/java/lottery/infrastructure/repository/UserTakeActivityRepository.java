@@ -1,13 +1,16 @@
 package lottery.infrastructure.repository;
 
 import lottery.common.Constants;
+import lottery.domain.activity.model.vo.ActivityPartakeRecordVO;
 import lottery.domain.activity.model.vo.DrawOrderVO;
 import lottery.domain.activity.model.vo.InvoiceVO;
 import lottery.domain.activity.model.vo.UserTakeActivityVO;
 import lottery.domain.activity.repository.IUserTakeActivityRepository;
+import lottery.infrastructure.dao.IActivityDao;
 import lottery.infrastructure.dao.IUserStrategyExportDao;
 import lottery.infrastructure.dao.IUserTakeActivityCountDao;
 import lottery.infrastructure.dao.IUserTakeActivityDao;
+import lottery.infrastructure.po.Activity;
 import lottery.infrastructure.po.UserStrategyExport;
 import lottery.infrastructure.po.UserTakeActivity;
 import lottery.infrastructure.po.UserTakeActivityCount;
@@ -30,6 +33,9 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
 
     @Resource
     private IUserStrategyExportDao userStrategyExportDao;
+
+    @Resource
+    private IActivityDao activityDao;
     @Override
     public int subtractionLeftCount(Long activityId, String activityName, Integer takeCount, Integer userTakeLeftCount, String uId, Timestamp partakeDate) {
         if (null == userTakeLeftCount) {
@@ -146,5 +152,13 @@ public class UserTakeActivityRepository implements IUserTakeActivityRepository {
             invoiceVOList.add(invoiceVO);
         }
         return invoiceVOList;
+    }
+
+    @Override
+    public void updateActivityStock(ActivityPartakeRecordVO activityPartakeRecordVO) {
+        Activity activity = new Activity();
+        activity.setActivityId(activityPartakeRecordVO.getActivityId());
+        activity.setStockSurplusCount(activityPartakeRecordVO.getStockSurplusCount());
+        activityDao.updateActivityStock(activity);
     }
 }

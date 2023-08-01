@@ -105,4 +105,14 @@ public class ActivityProcessTest {
         log.info("请求入参： {}", JSON.toJSONString(req));
         log.info("测试结果： {}", JSON.toJSONString(drawProcessResult));
     }
+
+    @Test
+    public void test_doDrAWProcess() {
+        DrawProcessReq req = new DrawProcessReq();
+        req.setuId("newtest");
+        req.setActivityId(100001L);
+        DrawProcessResult result = activityProcess.doDrawProcess(req);
+        log.info("请求入参：{}", JSON.toJSONString(req));
+        log.info("测试结果：{}", JSON.toJSONString(result));
+    }
 }

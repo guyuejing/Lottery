@@ -5,10 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import lottery.common.Constants;
 import lottery.common.Result;
 import lottery.domain.activity.model.req.PartakeReq;
-import lottery.domain.activity.model.vo.ActivityBillVO;
-import lottery.domain.activity.model.vo.DrawOrderVO;
-import lottery.domain.activity.model.vo.InvoiceVO;
-import lottery.domain.activity.model.vo.UserTakeActivityVO;
+import lottery.domain.activity.model.res.StockResult;
+import lottery.domain.activity.model.vo.*;
 import lottery.domain.activity.repository.IUserTakeActivityRepository;
 import lottery.domain.activity.service.partake.BaseActivityPartake;
 import lottery.domain.support.ids.IIDGenerator;
@@ -143,8 +141,23 @@ public class ActivityPartakeImpl extends BaseActivityPartake {
             dbRouter.setTBKey(tbCount);
             // 查询数据
             return userTakeActivityRepository.scanInvoiceMqState();
-        }finally {
+        } finally {
             dbRouter.clear();
         }
+    }
+
+    @Override
+    protected StockResult subtractionActivityStockByRedis(String uId, Long activityId, Integer stockCount) {
+        return activityRepository.subtractionActivityStockByRedis(uId, activityId, stockCount);
+    }
+
+    @Override
+    protected void recoverActivityCacheStockByRedis(String tokenKey) {
+        activityRepository.recoverActivityCacheStockByRedis(tokenKey);
+    }
+
+    @Override
+    public void updateActivityStock(ActivityPartakeRecordVO activityPartakeRecordVO) {
+        userTakeActivityRepository.updateActivityStock(activityPartakeRecordVO);
     }
 }

@@ -3,6 +3,7 @@ package lottery.domain.activity.service.partake;
 import lottery.common.Result;
 import lottery.domain.activity.model.req.PartakeReq;
 import lottery.domain.activity.model.res.PartakeResult;
+import lottery.domain.activity.model.vo.ActivityPartakeRecordVO;
 import lottery.domain.activity.model.vo.DrawOrderVO;
 import lottery.domain.activity.model.vo.InvoiceVO;
 
@@ -42,4 +43,11 @@ public interface IActivityPartake {
      * @return 发货单
      */
     List<InvoiceVO> scanInvoiceMqState(int dbCount, int tbCount);
+
+    /**
+     * 更新活动库存
+     *
+     * @param activityPartakeRecordVO   活动领取记录
+     */
+    void updateActivityStock(ActivityPartakeRecordVO activityPartakeRecordVO);
 }

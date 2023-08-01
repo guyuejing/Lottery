@@ -2,10 +2,14 @@ package lottery.infrastructure.repository;
 
 import lottery.common.Constants;
 import lottery.domain.activity.model.req.PartakeReq;
+import lottery.domain.activity.model.res.StockResult;
 import lottery.domain.activity.model.vo.*;
 import lottery.domain.activity.repository.IActivityRepository;
 import lottery.infrastructure.dao.*;
 import lottery.infrastructure.po.*;
+import lottery.infrastructure.util.RedisUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
@@ -16,6 +20,7 @@ import java.util.List;
 
 @Repository
 public class ActivityRepository implements IActivityRepository {
+    private Logger logger = LoggerFactory.getLogger(ActivityRepository.class);
     @Resource
     private IActivityDao activityDao;
 
@@ -30,6 +35,8 @@ public class ActivityRepository implements IActivityRepository {
     @Resource
     private IUserTakeActivityCountDao userTakeActivityCountDao;
 
+    @Resource
+    private RedisUtil redisUtil;
     @Override
     public void addActivity(ActivityVO activity) {
         Activity req = new Activity();
@@ -92,6 +99,7 @@ public class ActivityRepository implements IActivityRepository {
         activityBillVO.setBeginDateTime(activity.getBeginDateTime());
         activityBillVO.setEndDateTime(activity.getEndDateTime());
         activityBillVO.setTakeCount(activity.getTakeCount());
+        activityBillVO.setStockCount(activity.getStockCount());
         activityBillVO.setStockSurplusCount(activity.getStockSurplusCount());
         activityBillVO.setStrategyId(activity.getStrategyId());
         activityBillVO.setState(activity.getState());
@@ -120,5 +128,32 @@ public class ActivityRepository implements IActivityRepository {
             activityVOList.add(activityVO);
         }
         return activityVOList;
+    }
+
+    @Override
+    public StockResult subtractionActivityStockByRedis(String uId, Long activityId, Integer stockCount) {
+        // 设置抽奖活动库存key
+        String stockKey = Constants.RedisKey.KEY_LOTTERY_ACTIVITY_STOCK_COUNT(activityId);
+        // 扣减库存 stockUsedCount为当前已占用库存
+        Integer stockUsedCount = (int) redisUtil.incr(stockKey, 1);
+        if (stockUsedCount > stockCount) {
+            redisUtil.decr(stockKey, 1);
+            return new StockResult(Constants.ResponseCode.OUT_OF_STOCK.getCode(), Constants.ResponseCode.OUT_OF_STOCK.getInfo());
+        }
+        // 以活动库存占用编号 生成对应加锁Key， 细化锁的颗粒度
+        String stockTokenKey = Constants.RedisKey.KEY_LOTTERY_ACTIVITY_STOCK_COUNT_TOKEN(activityId, stockUsedCount);
+        // 使用redis的setNx加分布式锁
+        boolean lockToken = redisUtil.setNx(stockTokenKey, 350L);
+        if (!lockToken) {
+            logger.info("抽奖活动{}用户秒杀{}扣减库存，分布式锁失败：{}", activityId, uId, stockTokenKey);
+            return new StockResult(Constants.ResponseCode.ERR_TOKEN.getCode(), Constants.ResponseCode.ERR_TOKEN.getInfo());
+        }
+        return new StockResult(Constants.ResponseCode.SUCCESS.getCode(), Constants.ResponseCode.SUCCESS.getInfo());
+    }
+
+    @Override
+    public void recoverActivityCacheStockByRedis(String tokenKey) {
+        if (null == tokenKey) return;
+        redisUtil.del(tokenKey);
     }
 }

@@ -26,6 +26,8 @@ public class ActivityBillVO {
     private Timestamp beginDateTime;
     /** 结束时间 */
     private Timestamp endDateTime;
+    /** 库存 */
+    private Integer stockCount;
     /** 库存剩余 */
     private Integer stockSurplusCount;
     /**

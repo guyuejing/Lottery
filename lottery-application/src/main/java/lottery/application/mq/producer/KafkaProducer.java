@@ -1,6 +1,7 @@
 package lottery.application.mq.producer;
 
 import com.alibaba.fastjson.JSON;
+import lottery.domain.activity.model.vo.ActivityPartakeRecordVO;
 import lottery.domain.activity.model.vo.InvoiceVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -8,7 +9,6 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.SendResult;
 import org.springframework.stereotype.Component;
 import org.springframework.util.concurrent.ListenableFuture;
-import org.springframework.util.concurrent.ListenableFutureCallback;
 
 import javax.annotation.Resource;
 
@@ -28,6 +28,10 @@ public class KafkaProducer {
     public static final String TOPIC_INVOICE = "lottery_invoice";
 
     /**
+     * mq topic ：活动领取记录
+     */
+    public static final String TOPIC_ACTIVITY_PARTAKE = "lottery_activity_partake";
+    /**
      * 发送中奖单
      * @param invoiceVO
      * @return
@@ -36,5 +40,11 @@ public class KafkaProducer {
         String sendData = JSON.toJSONString(invoiceVO);
         logger.info("发送MQ消息： topic: {}, bizId:{}, message:{}", TOPIC_INVOICE, invoiceVO.getuId(), sendData);
         return kafkaTemplate.send(TOPIC_INVOICE, sendData);
+    }
+
+    public ListenableFuture<SendResult<String, Object>> sendLotteryActivityPartakeRecord(ActivityPartakeRecordVO activityPartakeRecord) {
+        String objJson = JSON.toJSONString(activityPartakeRecord);
+        logger.info("发送MQ消息（领取活动记录） topic：{} bizId： {} message：{}", TOPIC_ACTIVITY_PARTAKE, activityPartakeRecord.getuId(),objJson);
+        return kafkaTemplate.send(TOPIC_ACTIVITY_PARTAKE, objJson);
     }
 }
