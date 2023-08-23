@@ -28,7 +28,7 @@ public class EngineResult {
      */
     private Long nodeId;
     /**
-     * 果实节点值
+     * 果实节点值  对应的活动ID
      */
     private String nodeValue;
 

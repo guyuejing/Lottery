@@ -42,13 +42,16 @@ public class RuleRepository implements IRuleRepository {
 
         // 树节点 -> 树之间的边
         Map<Long, TreeNodeVO> treeNodeMap = new HashMap<>();
+        // 查询这棵树的所有节点
         List<RuleTreeNode> ruleTreeNodes = ruleTreeNodeDao.queryRuleTreeNodeList(treeId);
         for (RuleTreeNode ruleTreeNode : ruleTreeNodes) {
+            // 存放每个节点 所对应的所有边 封装成TreeNodeLineVO
             List<TreeNodeLineVO> treeNodeLineVOList = new ArrayList<>();
             if (Constants.NodeType.STEM.equals(ruleTreeNode.getNodeType())) {
                 RuleTreeNodeLine ruleTreeNodeLineReq = new RuleTreeNodeLine();
                 ruleTreeNodeLineReq.setTreeId(treeId);
                 ruleTreeNodeLineReq.setNodeIdFrom(ruleTreeNode.getId());
+                // 查询该节点的所有边
                 List<RuleTreeNodeLine> ruleTreeNodeLineList = ruleTreeNodeLineDao.queryRuleTreeNodeLineList(ruleTreeNodeLineReq);
                 for (RuleTreeNodeLine nodeLine : ruleTreeNodeLineList) {
                     TreeNodeLineVO treeNodeLineInfo = new TreeNodeLineVO();

@@ -35,7 +35,9 @@ public abstract class EngineBase extends EngineConfig implements EngineFilter{
         while (Constants.NodeType.STEM.equals(treeNodeInfo.getNodeType())) {
             String ruleKey = treeNodeInfo.getRuleKey();
             LogicFilter logicFilter = logicFilterMap.get(ruleKey);
+            // 获取边界条件值
             String matterValue = logicFilter.matterValue(matterReq);
+            // 找到满足条件的下一个节点
             Long nextNode = logicFilter.filter(matterValue, treeNodeInfo.getTreeNodeLineInfoList());
             treeNodeInfo = treeNodeVOMap.get(nextNode);
             log.info("决策树引擎=>{} userId：{} treeId：{} treeNode：{} ruleKey：{} matterValue：{}",

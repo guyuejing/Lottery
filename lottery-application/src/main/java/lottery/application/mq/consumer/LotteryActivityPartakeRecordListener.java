@@ -6,6 +6,7 @@ import lottery.domain.activity.service.partake.IActivityPartake;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.kafka.support.Acknowledgment;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.messaging.handler.annotation.Header;
@@ -24,7 +25,7 @@ public class LotteryActivityPartakeRecordListener {
 
     @Resource
     private IActivityPartake activityPartake;
-
+    @KafkaListener(topics = "lottery_activity_partake", groupId = "lottery")
     public void onMessage(ConsumerRecord<?,?> record, Acknowledgment ack, @Header(KafkaHeaders.RECEIVED_TOPIC)String topic) {
         Optional<?> message = Optional.ofNullable(record.value());
         if (!message.isPresent()) {

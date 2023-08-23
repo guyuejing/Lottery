@@ -146,9 +146,9 @@ public class ActivityRepository implements IActivityRepository {
         boolean lockToken = redisUtil.setNx(stockTokenKey, 350L);
         if (!lockToken) {
             logger.info("抽奖活动{}用户秒杀{}扣减库存，分布式锁失败：{}", activityId, uId, stockTokenKey);
-            return new StockResult(Constants.ResponseCode.ERR_TOKEN.getCode(), Constants.ResponseCode.ERR_TOKEN.getInfo());
+            return new StockResult(Constants.ResponseCode.ERR_TOKEN.getCode(), Constants.ResponseCode.ERR_TOKEN.getInfo(), stockTokenKey, stockCount-stockUsedCount);
         }
-        return new StockResult(Constants.ResponseCode.SUCCESS.getCode(), Constants.ResponseCode.SUCCESS.getInfo());
+        return new StockResult(Constants.ResponseCode.SUCCESS.getCode(), Constants.ResponseCode.SUCCESS.getInfo(), stockTokenKey,stockCount-stockUsedCount);
     }
 
     @Override
